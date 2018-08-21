@@ -1,0 +1,16 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "A collection of notes and cheat sheets on computer administration and software development",
+  "dependencies": {},
+  "devDependencies": {
+    "vuepress": "^0.14.2"
+  },
+  "scripts": {
+    "build": "vuepress build",
+    "serve": "vuepress dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
