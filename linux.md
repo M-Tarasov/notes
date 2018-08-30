@@ -146,3 +146,11 @@ for i in GEDIR* ; do j=`echo $i | sed 's/GEDIR/GPSR/g'` && mv $i $j; done
 ```bash
 wc -l <file_name>
 ```
+
+Создание загрузочной флешки из iso-образа (имя устройства БЕЗ номера в конце!):
+
+```bash
+sudo dd bs=4M if=~/Downloads/archlinux-2018.08.01-x86_64.iso of=/dev/sdf status=progress oflag=sync
+
+wipefs --all /dev/sdf    # восстановление флешки
+```
