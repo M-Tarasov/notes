@@ -4,7 +4,7 @@
   "description": "A collection of notes and cheat sheets on computer administration and software development",
   "dependencies": {},
   "devDependencies": {
-    "vuepress": "^0.14.2"
+    "vuepress": "^1.0.2"
   },
   "scripts": {
     "build": "vuepress build",

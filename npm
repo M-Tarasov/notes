@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker run --rm -ti -u node -p 8080:8080 -v "$(pwd):/project" -v "$HOME/.npm:/home/node/.npm" -w /project node:lts npm $@
+

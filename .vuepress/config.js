@@ -4,7 +4,14 @@ module.exports = {
     base: "/notes/",
     themeConfig: {
         sidebar: [
-            '/linux'
+            {
+                title: 'Linux',
+                collapsable: false,
+                children: [ 
+                    ['/linux/', 'Общее'],
+                    '/linux/apparmor'
+                ]
+            }            
         ]
     }
 }
