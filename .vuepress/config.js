@@ -9,7 +9,8 @@ module.exports = {
                 collapsable: false,
                 children: [ 
                     ['/linux/', 'Общее'],
-                    '/linux/apparmor'
+                    '/linux/apparmor',
+                    '/linux/python_deb'
                 ]
             }            
         ]
