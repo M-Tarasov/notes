@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Python for Debian | Notes and Cheat-Sheets</title>
+    <meta name="description" content="Notes and cheat sheets">
+    
+    
+    <link rel="preload" href="/notes/assets/css/0.styles.4cc01c17.css" as="style"><link rel="preload" href="/notes/assets/js/app.b9889eba.js" as="script"><link rel="preload" href="/notes/assets/js/2.18c096f0.js" as="script"><link rel="preload" href="/notes/assets/js/8.00188e52.js" as="script"><link rel="prefetch" href="/notes/assets/js/3.41ffcb11.js"><link rel="prefetch" href="/notes/assets/js/4.11d613bd.js"><link rel="prefetch" href="/notes/assets/js/5.1543fec0.js"><link rel="prefetch" href="/notes/assets/js/6.9a68f598.js"><link rel="prefetch" href="/notes/assets/js/7.0f0e0e05.js"><link rel="prefetch" href="/notes/assets/js/9.ef9e9d91.js">
+    <link rel="stylesheet" href="/notes/assets/css/0.styles.4cc01c17.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/notes/" class="home-link router-link-active"><!----> <span class="site-name">Notes and Cheat-Sheets</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/notes/linux/" class="sidebar-link">Общее</a></li><li><a href="/notes/linux/apparmor.html" class="sidebar-link">App Armor</a></li><li><a href="/notes/linux/python_deb.html" class="active sidebar-link">Python for Debian</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/notes/linux/python_deb.html#commands" class="sidebar-link">Commands</a></li><li class="sidebar-sub-header"><a href="/notes/linux/python_deb.html#setup-py" class="sidebar-link">setup.py</a></li><li class="sidebar-sub-header"><a href="/notes/linux/python_deb.html#stdeb-cfg" class="sidebar-link">stdeb.cfg</a></li><li class="sidebar-sub-header"><a href="/notes/linux/python_deb.html#man-page" class="sidebar-link">Man Page</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="python-for-debian"><a href="#python-for-debian" aria-hidden="true" class="header-anchor">#</a> Python for Debian</h1> <h2 id="commands"><a href="#commands" aria-hidden="true" class="header-anchor">#</a> Commands</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># build debian package</span>
+python3 setup.py --command-packages<span class="token operator">=</span>stdeb.command bdist_deb
+
+<span class="token comment"># lint package</span>
+lintian deb_dist/<span class="token operator">&lt;</span>package_name<span class="token operator">&gt;</span>.deb
+
+<span class="token comment"># show package metadata</span>
+dpkg -I deb_dist/<span class="token operator">&lt;</span>package_name<span class="token operator">&gt;</span>.deb
+
+<span class="token comment"># list files in package</span>
+dpkg -c deb_dist/<span class="token operator">&lt;</span>package_name<span class="token operator">&gt;</span>.deb
+
+<span class="token comment"># install package</span>
+<span class="token function">sudo</span> dpkg -i deb_dist/<span class="token operator">&lt;</span>package_name<span class="token operator">&gt;</span>.deb
+</code></pre></div><h2 id="setup-py"><a href="#setup-py" aria-hidden="true" class="header-anchor">#</a> <code>setup.py</code></h2> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> setuptools <span class="token keyword">import</span> setup<span class="token punctuation">,</span> find_packages
+
+setup<span class="token punctuation">(</span>
+    name<span class="token operator">=</span><span class="token string">&quot;tool&quot;</span><span class="token punctuation">,</span>
+    description<span class="token operator">=</span><span class="token string">&quot;Super tool&quot;</span><span class="token punctuation">,</span>
+    version<span class="token operator">=</span><span class="token string">&quot;0.0.1&quot;</span><span class="token punctuation">,</span>
+    packages<span class="token operator">=</span>find_packages<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    scripts<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'tool'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    python_requires<span class="token operator">=</span><span class="token string">'&gt;=3.6'</span><span class="token punctuation">,</span>
+
+    author<span class="token operator">=</span><span class="token string">&quot;Tool Author&quot;</span><span class="token punctuation">,</span>
+    author_email<span class="token operator">=</span><span class="token string">&quot;author@domain.com&quot;</span><span class="token punctuation">,</span>
+    package_data <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token string">'tool'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'resources/*'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    data_files <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token string">'/usr/share/man/man1'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'doc/tool.1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+</code></pre></div><h2 id="stdeb-cfg"><a href="#stdeb-cfg" aria-hidden="true" class="header-anchor">#</a> <code>stdeb.cfg</code></h2> <div class="language- extra-class"><pre class="language-text"><code>[DEFAULT]
+Depends3: u-boot-tools, cpio
+</code></pre></div><h2 id="man-page"><a href="#man-page" aria-hidden="true" class="header-anchor">#</a> Man Page</h2> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token hr punctuation">---</span>
+title: tool(1)
+author: Tool Author
+date: July 2019
+<span class="token title important">header: tool tool
+<span class="token punctuation">---</span></span>
+
+<span class="token title important"><span class="token punctuation">#</span> NAME</span>
+
+tool – super cool tool
+
+<span class="token title important"><span class="token punctuation">#</span> SYNOPSIS</span>
+
+tool \<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>args\</span><span class="token punctuation">&gt;</span></span>
+: run tool with args
+
+</code></pre></div><p><strong>Translate to man page</strong></p> <div class="language-bash extra-class"><pre class="language-bash"><code>pandoc tool.md -s -t <span class="token function">man</span> <span class="token operator">&gt;</span> tool.1
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/notes/linux/apparmor.html" class="prev">
+          App Armor
+        </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/notes/assets/js/app.b9889eba.js" defer></script><script src="/notes/assets/js/2.18c096f0.js" defer></script><script src="/notes/assets/js/8.00188e52.js" defer></script>
+  </body>
+</html>
